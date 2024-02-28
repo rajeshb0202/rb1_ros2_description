@@ -24,19 +24,14 @@ This package only modifies/adapts files from these repositories/packages:
 ## Important files in the package regarding controllers perpective 
 -------------------------------------------------------------------------------------------------------------
 
-rb1_ros2_description/
-├── config/
-│   └── rb1_controller.yaml                 //This file contains the implementation of mentioned controllers.
-│
-├── launch/
-│   └── rb1_ros2_xacro.launch.py            //This file launches gazebo, robot state publisher, spawning the robot in gazebo, and starts mentioned controllers.
-│
-├── urdf/
-│   └── ros2_control/
-│       └── ros2_control.urdf.xacro         //This file contains all mentioned controller plugins and the gazebo_ros2_control plugin.
-│
-└── xacro/
-    └── rb1_ros2_base.urdf.xacro            //This is the main control xacro file which contains all the xacro links of all the robot's linkages and joints.
+rb1_controller.yaml                 #Inside /config directory. This file contains the implementation of mentioned controllers.
+
+rb1_ros2_xacro.launch.py            #Inside /launch directory. This file launches Gazebo, robot state publisher, spawning the robot in Gazebo, and starts mentioned controllers.
+
+ros2_control.urdf.xacro             #Inside /urdf/ros2_control directory This file contains all mentioned controller plugins and the gazebo_ros2_control plugin.
+
+rb1_ros2_base.urdf.xacro            #Inside /xacro directory This is the main robot xacro file which contains all the xacro definitions of the robot's linkages and joints.
+
 
 
 
@@ -44,10 +39,13 @@ rb1_ros2_description/
 ## Controllers used in this package:
 -------------------------------------------------------------------------------------------------------------
 In this package, there are two controllers and one broadcaster implemented.
+
         1. The diff_drive_controller: 
                 It is used to move the robot. The DiffDriveController is implemmented in this case.
+
         2. The lift_controller: 
                 This is to make the robot's elevator up and down. Here JointGoupEffortController is implemented.
+
         3. joint_state_broadcaster: This is to publish the joints information.
                 In this case, the JointStateBroadcaster is used.
 
@@ -61,23 +59,23 @@ In this package, there are two controllers and one broadcaster implemented.
 -------------------------------------------------------------------------------------------------------------
 step 1: Installation and Building the package:
 ----------------------------------------------------
-    Clone this package into your workspace: 
-            git clone https://github.com/rajeshb0202/rb1_ros2_description.git
-    
-    Build and install this package:
-            cd ~/ros2_ws && colcon build --packages-select rb1_ros2_description
+Clone this package into your workspace: 
+        git clone https://github.com/rajeshb0202/rb1_ros2_description.git
+
+Build and install this package:
+        cd ~/ros2_ws && colcon build --packages-select rb1_ros2_description
 
 
 
 Step 2: Starting the simulation and the controllers:
 ------------------------------------------------------            
-    For to start simulation in gazebo and the above mentioned controllers. This will take around 1 to 1.5 minutes to load all the controllers.
-            ros2 launch rb1_base_description rb1_ros2_xacro.launch.py 
+For to start simulation in gazebo and the above mentioned controllers. This will take around 1 to 1.5 minutes to load all the controllers.
+        ros2 launch rb1_base_description rb1_ros2_xacro.launch.py 
 
-            "Don't close/stop the controller in this terminal"
+        "Don't close/stop the controller in this terminal"
 
-    Once the above started, check for the controllers loaded in the another terminal
-            ros2 control list_controllers
+Once the above started, check for the controllers loaded in the another terminal
+        ros2 control list_controllers
 
 
 
