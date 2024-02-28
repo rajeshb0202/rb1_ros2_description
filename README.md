@@ -84,17 +84,10 @@ step-3:  Moving the robot
 (The topic available for this task is : /diff_drive_controller/cmd_vel_unstamped)
 
 For to move the robot in the x-axis: 
-            ros2 topic pub /diff_drive_controller/cmd_vel_unstamped geometry_msgs/msg/Twist "linear:
-            x: 0.2
-            y: 0.0
-            z: 0.0
-            angular:
-            x: 0.0
-            y: 0.0
-            z: 0.0"
+        ros2 topic pub --rate 10 /diff_drive_controller/cmd_vel_unstamped geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0, z: 0.0}, angular: {x: 0.0,y: 0.0, z: 0.0}}"
 
 For to teleoperate the robot using keyboard
-            ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
+        ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
 
 
 
@@ -104,7 +97,7 @@ Step-4: Move the elevator up and down
 (The topic available for this task is : /lift_controller/commands)
 
 For to lift the elevator:
-            ros2 topic pub /lift_controller/commands std_msgs/msg/Float64MultiArray "data: [1.0]" -1
+        ros2 topic pub /lift_controller/commands std_msgs/msg/Float64MultiArray "data: [1.0]" -1
 
 For to bring the elevator down:
-            ros2 topic pub /lift_controller/commands std_msgs/msg/Float64MultiArray "data: [0.0]" -1
+        ros2 topic pub /lift_controller/commands std_msgs/msg/Float64MultiArray "data: [0.0]" -1
